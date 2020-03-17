@@ -2,15 +2,20 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+console.log(process.env)
+
+const { REACT_APP_FIREBASE_API_KEY, REACT_APP_FIREBASE_MESSAGE_SENDER_ID, REACT_APP_FIREBASE_MESSAGE_RECEIVER_ID, REACT_APP_FIREBASE_MEASUREMENT_ID } = process.env;
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDTa0ZUkv6ZFTUyafyTcfft4-6kazfg6DY",
-    authDomain: "crown-db-11020.firebaseapp.com",
-    databaseURL: "https://crown-db-11020.firebaseio.com",
-    projectId: "crown-db-11020",
-    storageBucket: "crown-db-11020.appspot.com",
-    messagingSenderId: "850478045197",
-    appId: "1:850478045197:web:520c47d672372fafed5d44"
+    apiKey: REACT_APP_FIREBASE_API_KEY,
+    authDomain: "crown-ecom-db.firebaseapp.com",
+    databaseURL: "https://crown-ecom-db.firebaseio.com",
+    projectId: "crown-ecom-db",
+    storageBucket: "crown-ecom-db.appspot.com",
+    messagingSenderId: REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
+    appId: `1:${REACT_APP_FIREBASE_MESSAGE_SENDER_ID}:web:${REACT_APP_FIREBASE_MESSAGE_RECEIVER_ID}`,
+    measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
