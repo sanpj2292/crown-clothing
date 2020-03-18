@@ -2,8 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-console.log(process.env)
-
 const { REACT_APP_FIREBASE_API_KEY, REACT_APP_FIREBASE_MESSAGE_SENDER_ID, REACT_APP_FIREBASE_MESSAGE_RECEIVER_ID, REACT_APP_FIREBASE_MEASUREMENT_ID } = process.env;
 
 // Your web app's Firebase configuration
@@ -17,11 +15,36 @@ const firebaseConfig = {
     appId: `1:${REACT_APP_FIREBASE_MESSAGE_SENDER_ID}:web:${REACT_APP_FIREBASE_MESSAGE_RECEIVER_ID}`,
     measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) {
+        return;
+    }
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+    if (!snapShot.exists) {
+        // Creation of Data
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            });
+        } catch (error) {
+            console.error('Error creating user data');
+        }
+    }
+    return userRef;
+};
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
