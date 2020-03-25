@@ -5,6 +5,7 @@ import { auth } from '../../firebase/firebase-utils';
 import { connect } from 'react-redux';
 
 import CartIcon from "../cart-icon/cart-icon";
+import CartDropdown from "../cart-dropdown/cart-dropdown";
 import './header.scss';
 
 const Header = ({ currentUser }) => {
@@ -23,13 +24,12 @@ const Header = ({ currentUser }) => {
                 }
                 <CartIcon />
             </div>
+            <CartDropdown />
         </div>
     )
 };
 
 const mapStateToProps = (state) => {
-    console.log('mapStateToProps... ');
-    console.log(state);
     return ({
         currentUser: state.user.currentUser
     });
