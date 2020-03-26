@@ -28,4 +28,22 @@
     margin-left: auto;
     font-size: 36px;
   }
+  .stripe-div {
+    display: flex;
+    flex-direction: column;
+
+    .test-warning {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 24px;
+      color: red;
+    }
+    
+    button {
+      justify-content: right;
+      margin-left: auto;
+      margin-top: 50px;
+    }
+  }
+
 }
