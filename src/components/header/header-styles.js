@@ -28,5 +28,7 @@ const OptionStyles = css`
     cursor: pointer;
 `;
 
-export const OptionLink = styled(Link)`${OptionStyles}`;
-export const OptionDiv = styled.div`${OptionStyles}`;
+export const OptionLink = styled(Link)`
+    padding: 10px 15px;
+    cursor: pointer;
+`;
