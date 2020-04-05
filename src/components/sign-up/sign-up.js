@@ -24,13 +24,6 @@ const SignUp = (props) => {
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
             await createUserProfileDocument(user, { displayName });
-            // Clean-up warning fix commit
-            // setUserCredentials({
-            //     displayName: '',
-            //     email: '',
-            //     password: '',
-            //     confirmPassword: ''
-            // });
         } catch (error) {
             console.error(error);
         }
