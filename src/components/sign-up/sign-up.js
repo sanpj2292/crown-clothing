@@ -43,6 +43,11 @@ const SignUp = (props) => {
 
     // componentWillUnmount
     useEffect(() => {
+        // Anyother function mentioned will be triggerred when the comp is first mounted
+        // Similar to componentDidMount()
+
+        // Return statement function will be clean-up code to prevent memory leakage
+        // Similar to componentWillUnmount()
         return () => {
             setUserCredentials({
                 displayName: '',
@@ -51,7 +56,7 @@ const SignUp = (props) => {
                 confirmPassword: ''
             });
         }
-    }, [])
+    }, []);
 
     return (
         <div className='sign-up'>
