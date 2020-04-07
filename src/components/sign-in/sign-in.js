@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import './sign-in.scss';
 import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
-import { auth, signInWithGoogle } from '../../firebase/firebase-utils';
+import { auth } from '../../firebase/firebase-utils';
+import { connect } from "react-redux";
+import { googleSignInStart } from "../../redux/user/user-actions";
 
 const SignIn = (props) => {
+    const { googleSignInStart } = props;
 
     const [userCredentials, setCredentials] = useState({ email: '', password: '' });
 
@@ -47,7 +50,8 @@ const SignIn = (props) => {
                 <div className='buttons'>
                     <CustomButton type='submit'>SignIn</CustomButton>
                     <CustomButton
-                        onClick={signInWithGoogle}
+                        type='button'
+                        onClick={googleSignInStart}
                         isGoogleSignIn>
                         Sign In With Google
                     </CustomButton>
@@ -57,4 +61,8 @@ const SignIn = (props) => {
     );
 }
 
-export default SignIn;
+const mapDispatchToProps = dispatch => ({
+    googleSignInStart: () => dispatch(googleSignInStart())
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
