@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/checkout/checkout";
 
 import Header from './components/header/header';
 import { selectCurrentUser } from "./redux/user/user-selectors";
+import { checkUserSession } from "./redux/user/user-actions";
 
 class App extends React.Component {
 
@@ -18,6 +19,8 @@ class App extends React.Component {
 
 
   componentDidMount() {
+    const { checkUserSession } = this.props;
+    checkUserSession();
     // This setCurrentUser is different from the one imported
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
@@ -64,4 +67,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  checkUserSession: () => dispatch(checkUserSession())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
