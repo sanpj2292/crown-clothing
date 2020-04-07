@@ -3,17 +3,16 @@ import StripeCheckout from "react-stripe-checkout";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { removeAllItems } from "../../redux/cart/cart-actions";
+import { clearCart } from "../../redux/cart/cart-actions";
 
-const StripeCheckoutButton = ({ price, history, removeAllItems }) => {
+const StripeCheckoutButton = ({ price, history, clearCart }) => {
     const priceForStripe = price * 100; // To Convert the price from dollars to cents
     const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
     const onToken = token => {
         alert('Payment has been successful');
-        console.log(token);
         // This function is from the props
-        removeAllItems();
+        clearCart();
         // Redirect to the home-page
         history.push('/');
     };
@@ -36,7 +35,7 @@ const StripeCheckoutButton = ({ price, history, removeAllItems }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        removeAllItems: () => dispatch(removeAllItems())
+        clearCart: () => dispatch(clearCart())
     };
 };
 
