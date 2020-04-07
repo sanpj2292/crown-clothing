@@ -10,8 +10,6 @@ import SignInSignUpPage from './pages/sign-in-sign-up/sign-in-sign-up';
 import CheckoutPage from "./pages/checkout/checkout";
 
 import Header from './components/header/header';
-import { auth, createUserProfileDocument } from './firebase/firebase-utils';
-import { setCurrentUser } from "./redux/user/user-actions";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 
 class App extends React.Component {
@@ -21,7 +19,6 @@ class App extends React.Component {
 
   componentDidMount() {
     // This setCurrentUser is different from the one imported
-    const { setCurrentUser } = this.props;
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
@@ -67,14 +64,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setCurrentUser: user => {
-      const userAction = setCurrentUser(user); // User Action Object
-      return dispatch(userAction);
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
