@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import './sign-in.scss';
 import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
-import { auth } from '../../firebase/firebase-utils';
 import { connect } from "react-redux";
-import { googleSignInStart } from "../../redux/user/user-actions";
+import { googleSignInStart, emailSignInStart } from "../../redux/user/user-actions";
 
 const SignIn = (props) => {
     const { googleSignInStart } = props;
@@ -15,15 +14,16 @@ const SignIn = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await auth.signInWithEmailAndPassword(email, password);
-            setCredentials({
-                email: '',
-                password: ''
-            });
-        } catch (error) {
-            console.error(error);
-        }
+        props.emailSignInStart(email, password);
+        // try {
+        //     await auth.signInWithEmailAndPassword(email, password);
+        //     setCredentials({
+        //         email: '',
+        //         password: ''
+        //     });
+        // } catch (error) {
+        //     console.error(error);
+        // }
     };
 
     const handleChange = e => {
@@ -62,7 +62,8 @@ const SignIn = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    googleSignInStart: () => dispatch(googleSignInStart())
+    googleSignInStart: () => dispatch(googleSignInStart()),
+    emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);
