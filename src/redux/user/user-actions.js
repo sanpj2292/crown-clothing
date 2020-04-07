@@ -22,3 +22,16 @@ export const emailSignInStart = (emailAndPassword) => ({
 export const checkUserSession = () => ({
     type: actionTypes.CHECK_USER_SESSION
 });
+
+export const signOutStart = () => ({
+    type: actionTypes.SIGN_OUT_START
+});
+
+export const signOutSuccess = () => ({
+    type: actionTypes.SIGN_OUT_SUCCESS,
+});
+
+export const signOutFailure = (error) => ({
+    type: actionTypes.SIGN_OUT_FAILURE,
+    payload: error
+});
